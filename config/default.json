@@ -1,0 +1,4 @@
+{
+    "port": 5000,
+    "mongoUri": "mongodb+srv://FightingRobot:as@3dsA!22sdCs!2@e2!@cluster0.felse.mongodb.net/app?retryWrites=true&w=majority"
+}
