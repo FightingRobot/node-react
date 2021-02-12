@@ -1,5 +1,6 @@
 const express = require('express')
 const config = require('config')
+const path = require('path')
 // const mongoose = require('mongoose')
 
 const app = express()
@@ -9,6 +10,14 @@ const app = express()
 // const PORT = config.get('port') || 5000;
 const port = process.env.PORT || process.env.OPENSHIFT_NODEJS_PORT || 8080;
 const ip = process.env.IP || process.env.OPENSHIFT_NODEJS_IP || '0.0.0.0';
+
+if (process.env.NODE_ENV === 'production') {
+  app.use('/', express.static(path.join(__dirname, 'client', 'build')))
+
+  app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'))
+  })
+}
 
 async function start() {
   try {
